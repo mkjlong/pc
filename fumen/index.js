@@ -67,7 +67,7 @@ $("body").on("keydown",function(e){
         board_states.push(fumen)
         element.src = getDataURL(fumen, height)   
     }else if(e.key.toLowerCase()=="c"){
-        if(e.ctrlKey){//copy image
+        if(e.ctrlKey || e.metaKey){//copy image
             sliceSize = 512
             dataurl = board.src.split(",")[1]
             console.log(board.src)
