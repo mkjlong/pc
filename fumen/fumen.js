@@ -75,7 +75,6 @@ function getDataURL(input, height = 4){
 
 			var binary_gif = gif.stream().getData();
 			var data_url = 'data:image/gif;base64,' + encode64(binary_gif);
-			console.log(input, pages.length, data_url)
 
 			return data_url;
 		}
@@ -200,7 +199,7 @@ function draw(fumenPage, tilesize, numrows) {
 					// all highlights
 					context.fillStyle = colors[field.at(i, j)].highlight
 					context.fillRect(i * tilesize, height + up_height - (j + 1) * tilesize - tilesize / 5, tilesize, tilesize / 5)
-					}
+				}
 			}
 		}
 	}

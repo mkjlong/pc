@@ -52,31 +52,53 @@ ul{
     color: #868686;
 }
 
+
+
+
+.T[active="0"]{
+    color:#9739a2
+}
 .T[active="1"]{
-   color:#b451ac 
+   color:#d958e9 
 }
-
+.I[active="0"]{
+    color:#42afe1
+}
 .I[active="1"]{
-    color:#41afde
+    color:#6ceaff
 }
 
+.J[active="0"]{
+    color:#1165b5
+}
 .J[active="1"]{
-    color:#1983bf
+    color:#339bff
 }
 
+.L[active="0"]{
+    color:#f38927
+}
 .L[active="1"]{
-    color:#ef9535
+    color:#ffba59
 }
 
-
+.O[active="0"]{
+    color:#f6d03c
+}
 .O[active="1"]{
-    color:#f7d33e
+    color:#ffff7f
 }
 
-.S[active="1"]{
+.S[active="0"]{
     color:#51b84d
 }
+.S[active="1"]{
+    color:#84f880
+}
 
+.Z[active="0"]{
+    color:#eb4f65
+}
 .Z[active="1"]{
-    color:#ef624d
+    color:#ff7f79
 }

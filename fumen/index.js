@@ -21,9 +21,7 @@ board.onmousemove = board.onmousedown = function(event) {
         const index = y*10 + x;
 
         field = decoder.decode(fumen)
-        console.log(`(${x},${y})`)
         field[0]._field.field.pieces[index] = piece
-        console.log(field[0]._field.field);
         fumen = encoder.encode(field);
         element.src = getDataURL(fumen, height)
     }else if(event.buttons==2){//DESTROY
@@ -40,9 +38,33 @@ board.onmousemove = board.onmousedown = function(event) {
         if(fumen != board_states[board_states.length-1]){
             element.src = getDataURL(fumen, height)
         }
-
     }
 }
+
+
+board.addEventListener("mouseup",function(e){
+    if(e.which=="2"){
+        console.log("hi");
+        const x = Math.floor((event.pageX - this.parentElement.offsetLeft + this.width/2)/22);
+        const y = (height-1) - Math.floor((event.offsetY - 22/5)/22);
+        if(y>=height)return;
+        if(x>9)return;
+        if(x<0)return;
+        if(y<0)return;
+        const index = y*10 + x;
+        field = decoder.decode(fumen)
+        console.log("hi");
+        if(piece==field[0]._field.field.pieces[index])return;
+        piece = field[0]._field.field.pieces[index];
+
+        if(piece==8){
+            $(`.mino_select[active="1"]`).click()
+            return;
+        }
+
+        $("."+["","I","L","O","Z","T","J","S"][piece]).click();
+    }
+})
 
 board.onmouseup = function(event){
     if(fumen != board_states[board_states.length-1]){
@@ -51,7 +73,7 @@ board.onmouseup = function(event){
 }
 
 
-board.oncontextmenu=function(e){
+document.oncontextmenu=function(e){
     e.preventDefault();
 }
 
@@ -70,7 +92,6 @@ $("body").on("keydown",function(e){
         if(e.ctrlKey || e.metaKey){//copy image
             sliceSize = 512
             dataurl = board.src.split(",")[1]
-            console.log(board.src)
             let byteCharacters = atob(dataurl)
             let byteArrays = []
             for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
@@ -86,6 +107,44 @@ $("body").on("keydown",function(e){
             navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
         }else{//copy fumen
             navigator.clipboard.writeText(fumen)
+        }
+    }else if(e.key == "Enter"){//clear skimmed rows
+        var numcols = 10;
+        var numrows = height;
+        var page = decoder.decode(fumen)
+        skim_rows = []
+        for (i = 0; i < numrows; i++) {
+            if(page[0]._field.field.pieces.slice(i*numcols,i*numcols+10).every(n=>n)){
+                skim_rows.push(i)
+            }
+        }
+        for(var row of skim_rows.reverse()){
+            console.log(skim_rows);
+            for (i = row; i < numrows; i++) {
+                console.log(page[0]._field.field.pieces.slice(i*numcols,i*numcols+10));
+                console.log(page[0]._field.field.pieces.slice((i+1)*numcols,(i+1)*numcols+10));
+                for(j=0;j<numcols;j++){
+                    page[0]._field.field.pieces[i*numcols+j] = page[0]._field.field.pieces[(i+1)*numcols+j]
+                }
+            }
+            skim_rows=skim_rows.map(x=>x-1).slice(1)
+        }
+        fumen = encoder.encode(page);
+        if(fumen != board_states[board_states.length-1]){
+            board_states.push(fumen)
+            element.src = getDataURL(fumen, height)
+        }
+    }else if(e.key.toLowerCase() == "g"){
+        page = decoder.decode(fumen)
+        for(i=0;i<page[0]._field.field.pieces.length;i++){
+            if(page[0]._field.field.pieces[i]){
+                page[0]._field.field.pieces[i] = 8
+            }
+        }
+        fumen = encoder.encode(page);
+        if(fumen != board_states[board_states.length-1]){
+            board_states.push(fumen)
+            element.src = getDataURL(fumen, height)
         }
     }
 })
@@ -106,5 +165,4 @@ $(".mino_select").on("click",function(e){
         this.setAttribute("active",0)
         piece = 8
     }
-    console.log(this);
 })
