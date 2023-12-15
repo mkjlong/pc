@@ -55,7 +55,7 @@ reverseMappingRotation = {
 
 
 
-function getDataURL(input, height = 4){
+function getDataURL(input, height = 4, lock = true){
 	var fumenCodes = [];
 	const cellSize = 22
 
@@ -67,11 +67,11 @@ function getDataURL(input, height = 4){
 	for (let code of fumenCodes) {
 		var pages = decoder.decode(code);
 		if (pages.length == 1) {
-			return draw(pages[0], 22, height, true).toDataURL("image/png");
+			return draw(pages[0], 22, height, lock).toDataURL("image/png");
 
 		}
 		if (pages.length > 1) {
-			const gif = drawFumens(pages, cellSize, height, 0, undefined);
+			const gif = drawFumens(pages, cellSize, height, 0, undefined, lock);
 
 			var binary_gif = gif.stream().getData();
 			var data_url = 'data:image/gif;base64,' + encode64(binary_gif);
@@ -136,7 +136,7 @@ function fumencanvas(input) {
 
 
 
-function draw(fumenPage, tilesize, numrows) {
+function draw(fumenPage, tilesize, numrows, lock) {
 	const up_height = tilesize/5;
 	var field = fumenPage.field;
 	var operation = fumenPage.operation;
@@ -180,18 +180,18 @@ function draw(fumenPage, tilesize, numrows) {
 		for (j = 0; j < numrows; j++) {
 			if(field.at(i, j) != '_') {
 				// all blocks
-				row_clear = 1
+				row_clear = true
 				for(n = j*10; n < j*10+10;n++){
 					if(fumenPage._field.field.pieces[n]==0){
-						row_clear=0
+						row_clear=false
 						break
 					}
 				}
 
-				if(row_clear==1){
-					context.fillStyle = colors[field.at(i, j)].skim
-				}else{
+				if(!row_clear || !lock){
 					context.fillStyle = colors[field.at(i, j)].normal
+				}else{
+					context.fillStyle = colors[field.at(i, j)].skim
 				}
 				
 				context.fillRect(i * tilesize, height + up_height - (j + 1) * tilesize - 1, tilesize, tilesize + 1)

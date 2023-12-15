@@ -1,16 +1,20 @@
 var fumen = "v115@vhAAgH"
 var height = 4
 var piece = 8
+var page_number = 0;
+var lock = true;
 
-
-board_states = ["v115@vhAAgH"]
+var board_states = ["v115@vhAAgH"]
+var previous_board_state = "v115@vhAAgH"
 
 element = document.getElementById("board")
 
 element.src = getDataURL(fumen, height)
 
 
-board.onmousemove = board.onmousedown = function(event) {
+var auto_pieces = []
+
+board.onmousemove = board.onmouseover = board.onmousedown = function(event) {
     if(event.buttons == 1){//PLACE
         const x = Math.floor((event.pageX - this.parentElement.offsetLeft + this.width/2)/22);
         const y = (height-1) - Math.floor((event.offsetY - 22/5)/22);
@@ -19,11 +23,28 @@ board.onmousemove = board.onmousedown = function(event) {
         if(x<0)return;
         if(y<0)return;
         const index = y*10 + x;
-
         field = decoder.decode(fumen)
-        field[0]._field.field.pieces[index] = piece
+        field[page_number]._field.field.pieces[index] = piece
         fumen = encoder.encode(field);
-        element.src = getDataURL(fumen, height)
+        const coords = [x,y]
+
+        /*
+        if(true){
+            temp_pieces = auto_pieces.concat([coords]).map(JSON.stringify).filter((e,i,a) => i === a.indexOf(e)).map(JSON.parse)
+            console.log(temp_pieces);
+        }
+        auto_pieces.push(coords);
+        auto_pieces = auto_pieces.map(JSON.stringify).filter((e,i,a) => i === a.indexOf(e)).map(JSON.parse)
+        */
+        
+        if(fumen != previous_board_state){
+            updateFumen(fumen)
+        }
+
+
+        
+
+
     }else if(event.buttons==2){//DESTROY
         const x = Math.floor((event.pageX - this.parentElement.offsetLeft + this.width/2)/22);
         const y = (height-1) - Math.floor((event.offsetY - 22/5)/22);
@@ -33,18 +54,41 @@ board.onmousemove = board.onmousedown = function(event) {
         if(y<0)return;
         const index = y*10 + x;
         field = decoder.decode(fumen)
-        field[0]._field.field.pieces[index] = 0
+        field[page_number]._field.field.pieces[index] = 0
+        
         fumen = encoder.encode(field);
-        if(fumen != board_states[board_states.length-1]){
-            element.src = getDataURL(fumen, height)
+        if(fumen != previous_board_state){
+            updateFumen(fumen)
         }
     }
 }
 
 
+function updateFumen(data=fumen,update=false,checkdupe = true){
+    if(typeof data == "string"){
+        fumen = data
+        if(fumen != board_states[board_states.length-1]||(!checkdupe)){
+            element.src = getDataURL(splitFumen(fumen)[page_number], height, lock)
+        }
+        if(update){
+            board_states.push(fumen)
+        }
+        previous_board_state = fumen
+    }else{
+        fumen = encoder.encode(data);
+        if(fumen != board_states[board_states.length-1]||(!checkdupe)){
+            element.src = getDataURL(splitFumen(fumen)[page_number], height, lock)
+        }
+        if(update){
+            board_states.push(fumen)
+        }
+        previous_board_state = fumen
+
+    }
+}
+
 board.addEventListener("mouseup",function(e){
     if(e.which=="2"){
-        console.log("hi");
         const x = Math.floor((event.pageX - this.parentElement.offsetLeft + this.width/2)/22);
         const y = (height-1) - Math.floor((event.offsetY - 22/5)/22);
         if(y>=height)return;
@@ -53,11 +97,9 @@ board.addEventListener("mouseup",function(e){
         if(y<0)return;
         const index = y*10 + x;
         field = decoder.decode(fumen)
-        console.log("hi");
-        if(piece==field[0]._field.field.pieces[index])return;
-        piece = field[0]._field.field.pieces[index];
+        piece = field[page_number]._field.field.pieces[index];
 
-        if(piece==8){
+        if(piece==8||piece==0){
             $(`.mino_select[active="1"]`).click()
             return;
         }
@@ -82,12 +124,12 @@ $("body").on("keydown",function(e){
         if(board_states.length>1){
             board_states.pop()
             fumen = board_states[board_states.length-1]
-            element.src = getDataURL(fumen, height)
+            updateFumen(fumen,false,false)
         }
-    }else if(e.key=="Delete"){
+    }else if(e.key=="Delete" || e.key.toLowerCase()=="r" || e.key.toLowerCase()=="backspace" ||e.key.toLowerCase()=="escape"){
         fumen = "v115@vhAAgH"
-        board_states.push(fumen)
-        element.src = getDataURL(fumen, height)   
+        page_number = 0
+        updateFumen(fumen,true)
     }else if(e.key.toLowerCase()=="c"){
         if(e.ctrlKey || e.metaKey){//copy image
             sliceSize = 512
@@ -111,41 +153,73 @@ $("body").on("keydown",function(e){
     }else if(e.key == "Enter"){//clear skimmed rows
         var numcols = 10;
         var numrows = height;
-        var page = decoder.decode(fumen)
+        var pages = decoder.decode(fumen)
         skim_rows = []
         for (i = 0; i < numrows; i++) {
-            if(page[0]._field.field.pieces.slice(i*numcols,i*numcols+10).every(n=>n)){
+            if(pages[0]._field.field.pieces.slice(i*numcols,i*numcols+10).every(n=>n)){
                 skim_rows.push(i)
             }
         }
         for(var row of skim_rows.reverse()){
-            console.log(skim_rows);
             for (i = row; i < numrows; i++) {
-                console.log(page[0]._field.field.pieces.slice(i*numcols,i*numcols+10));
-                console.log(page[0]._field.field.pieces.slice((i+1)*numcols,(i+1)*numcols+10));
                 for(j=0;j<numcols;j++){
-                    page[0]._field.field.pieces[i*numcols+j] = page[0]._field.field.pieces[(i+1)*numcols+j]
+                    pages[page_number]._field.field.pieces[i*numcols+j] = pages[page_number]._field.field.pieces[(i+1)*numcols+j]
                 }
             }
             skim_rows=skim_rows.map(x=>x-1).slice(1)
         }
-        fumen = encoder.encode(page);
-        if(fumen != board_states[board_states.length-1]){
-            board_states.push(fumen)
-            element.src = getDataURL(fumen, height)
-        }
+        fumen = encoder.encode(pages);
+        updateFumen(fumen,true)
+        
     }else if(e.key.toLowerCase() == "g"){
-        page = decoder.decode(fumen)
-        for(i=0;i<page[0]._field.field.pieces.length;i++){
-            if(page[0]._field.field.pieces[i]){
-                page[0]._field.field.pieces[i] = 8
+        pages = decoder.decode(fumen)
+        for(i=0;i<pages[page_number]._field.field.pieces.length;i++){
+            if(pages[page_number]._field.field.pieces[i]){
+                pages[page_number]._field.field.pieces[i] = 8
             }
         }
-        fumen = encoder.encode(page);
-        if(fumen != board_states[board_states.length-1]){
-            board_states.push(fumen)
-            element.src = getDataURL(fumen, height)
+        fumen = encoder.encode(pages);
+        updateFumen(fumen,true)
+    }else if(e.key.toLowerCase() == "v" && e.ctrlKey){
+        (async function(){
+            const text = await navigator.clipboard.readText();
+            try{
+                pages = decoder.decode(text)
+                fumen = text;
+                updateFumen(fumen,true)
+            }catch{
+                console.error(`${text} is not a valid fumen.`)
+                return;
+            }
+        })();
+        
+
+    }else if(e.key.toLowerCase() == "arrowleft"){
+        page_number -= 1
+        if(page_number<0){
+            pages = decoder.decode(fumen);
+            page_number = pages.length-1
         }
+        updateFumen(fumen,true,false)
+    }else if(e.key.toLowerCase() == "arrowright"){
+        pages = decoder.decode(fumen);
+        page_number += 1
+        if(page_number>=pages.length){
+            page_number = 0;
+        }
+        updateFumen(fumen,true,false)
+    }else if("1234567".includes(e.key)){
+        piece = Number(e.key);
+        $("."+["","T","I","J","L","O","S","Z"][piece]).click();
+    }else if(e.key.toLowerCase()=="l"){
+        lock = !lock
+        updateFumen(fumen,false,false)
+    }else if(e.key.toLowerCase() == "arrowup"){
+        height += 1
+        updateFumen(fumen,true,false)
+    }else if(e.key.toLowerCase() == "arrowdown"){
+        height -= 1
+        updateFumen(fumen,true,false)
     }
 })
 
