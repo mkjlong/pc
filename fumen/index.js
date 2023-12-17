@@ -28,16 +28,22 @@ board.onmousemove = board.onmouseover = board.onmousedown = function(event) {
         fumen = encoder.encode(field);
         const coords = [x,y]
 
-        /*
-        if(true){
-            temp_pieces = auto_pieces.concat([coords]).map(JSON.stringify).filter((e,i,a) => i === a.indexOf(e)).map(JSON.parse)
-            console.log(temp_pieces);
-        }
-        auto_pieces.push(coords);
-        auto_pieces = auto_pieces.map(JSON.stringify).filter((e,i,a) => i === a.indexOf(e)).map(JSON.parse)
-        */
+        
+        
+        
         
         if(fumen != previous_board_state){
+            /*if(true){
+                temp_pieces = auto_pieces.concat([coords]).map(JSON.stringify).filter((e,i,a) => i === a.indexOf(e)).map(JSON.parse)
+                console.table(auto_pieces);
+                if(temp_pieces.length>4){
+                    event.preventDefault();
+                    return;
+                }
+            }
+            auto_pieces.push(coords);
+            auto_pieces = auto_pieces.map(JSON.stringify).filter((e,i,a) => i === a.indexOf(e)).map(JSON.parse)
+            */
             updateFumen(fumen)
         }
 
@@ -219,6 +225,9 @@ $("body").on("keydown",function(e){
         updateFumen(fumen,true,false)
     }else if(e.key.toLowerCase() == "arrowdown"){
         height -= 1
+        updateFumen(fumen,true,false)
+    }else if(e.key.toLowerCase() == "m"){
+        fumen = mirrorFumen(fumen);
         updateFumen(fumen,true,false)
     }
 })
