@@ -1,4 +1,4 @@
-$("input").on("keydown",function(e){
+$("input").on("keydown",function(event){
     
     const key = event.key.toUpperCase();
     if(key == "ENTER" || event.ctrlKey){
