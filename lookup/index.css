@@ -1,0 +1,24 @@
+input{
+    text-transform: uppercase;
+}
+
+#fumendiv{
+    display: flex;
+    flex-direction: row;
+}
+
+#fumendiv > div{
+    border:2px solid black;
+    display: flex;
+    flex-direction: column;
+    margin:20px;
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#fumendiv>div > img{
+
+    display: block;
+    width: 200px;
+    border-top: 1px solid black;
+}

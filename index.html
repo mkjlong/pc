@@ -5,21 +5,33 @@
     <title>PC setups</title>
     <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="./sets.js" defer></script>
+    <script src="jszip.min.js"></script>
+    <script src="jszip-utils.min.js"></script>
+    <script src="tetris-fumen.js"></script>
+    <script src="fumen.js" defer></script>
     <script src="index.js" defer></script>
 </head>
 <body>
     <nav>
         <div class="setdiv">
-            <button>Konbini</button>
+            <button id = set>mk</button>
         </div>
         <div class="titlediv">
-            <button><</button>
-            <span id = "title">1st</span>
-            <button>></button>
+            <button class = changePC><</button>
+            <span id = "title">first pc</span>
+            <button class = changePC>></button>
         </div>
         <div class="settingsdiv">
-            
+            <img id = rotations>
+            <img id = theme>
+            <div id = search>
+                <input maxlength="7" type="text">
+            </div>
         </div>
     </nav>
+    <div id = content></div>
+    <iframe src="./1/index.html" frameborder="0"></iframe>
 </body>
 </html>

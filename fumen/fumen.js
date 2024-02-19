@@ -11,6 +11,8 @@ var colors = {
 	Empty: { normal: '#f3f3ed' },
 };
 
+const highlight = "#eeeeee"
+
 const fumens = [];
 
 const {decoder,encoder} = require('tetris-fumen')
@@ -164,17 +166,17 @@ function draw(fumenPage, tilesize, numrows, lock) {
 	}
 
 	const width = tilesize * numcols;
-	const height = numrows * tilesize;
+	const mino_height = numrows * tilesize;
 
 	var canvas = document.createElement('canvas');
 	canvas.width = width;
-	canvas.height = height + up_height;
+	canvas.height = mino_height + up_height;
 
 	const context = canvas.getContext('2d');
 
 	context.fillStyle = 'rgba(0, 0, 0, 0)';
 	
-	context.fillRect(0, 0, width, height);
+	context.fillRect(0, 0, width, mino_height);
 	
 	for (i = 0; i < numcols; i++) {
 		for (j = 0; j < numrows; j++) {
@@ -194,11 +196,12 @@ function draw(fumenPage, tilesize, numrows, lock) {
 					context.fillStyle = colors[field.at(i, j)].skim
 				}
 				
-				context.fillRect(i * tilesize, height + up_height - (j + 1) * tilesize - 1, tilesize, tilesize + 1)
-				if(field.at(i, j + 1) == '_') {
+				console.log(height);
+				context.fillRect(i * tilesize, mino_height + up_height - (j + 1) * tilesize - 1, tilesize, tilesize + 1)
+				if(field.at(i, j + 1) == '_' || j == height-1) {
 					// all highlights
 					context.fillStyle = colors[field.at(i, j)].highlight
-					context.fillRect(i * tilesize, height + up_height - (j + 1) * tilesize - tilesize / 5, tilesize, tilesize / 5)
+					context.fillRect(i * tilesize, mino_height + up_height - (j + 1) * tilesize - tilesize / 5, tilesize, tilesize / 5)
 				}
 			}
 		}

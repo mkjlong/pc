@@ -1,7 +1,44 @@
+@font-face {
+	font-family: feshfont;
+	src: url(./assets/fonts/VCREAS\ 3.0.ttf);
+}
+
+@font-face {
+	font-family: arcadegamer;
+	src: url(./assets/fonts/Arcade\ Gamer.otf);
+}
+@font-face {
+	font-family: pixe;
+	src: url(./assets/fonts/Pixeboy-z8XGD.ttf);
+}
+@font-face {
+	font-family: Cabin;
+	src: url(./assets/fonts/Cabin-Regular.ttf);
+	font-weight: 400;
+	font-style: normal
+}
+@font-face {
+	font-family: MinoFont;
+	src: url(data:font/woff;base64,d09GRk9UVE8AAAUkAAsAAAAABxwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAADTAAAAYMAAAGoS5stSkZGVE0AAAUIAAAAHAAAAByFmy/sR0RFRgAABNAAAAAYAAAAHAAVABRPUy8yAAABZAAAAEgAAABgWAhhGGNtYXAAAALYAAAAXQAAAWIJywzraGVhZAAAAQgAAAA0AAAANhQOlI9oaGVhAAABPAAAAB4AAAAkB2gFDWhtdHgAAAToAAAAIAAAACAdSAHAbWF4cAAAAVwAAAAGAAAABgAIUABuYW1lAAABrAAAASkAAAIWcTAiknBvc3QAAAM4AAAAEwAAACD/hgAyeJxjYGRgYADiBeIln+L5bb4ycDO/AIowXP+9TAVCr7ZmMGdgYDnE5A3kcjAwgUQBViYLXXicY2BkYGDyZmBgiGJlAZIMLIcYGBlQAQcAIs8BgQAAAABQAAAIAAB4nGNgYX7OOIGBlYGBqYtpDwMDQw+EZnzAYMjIBBRlYGVmgAFGBiQQkOaawtDA4MkQxazw34IhiskbWQ2TC4MCEDICAF5lCtB4nIWPMWvCUBSFz9NoydBSXEq3OxUFE15Ch9RVySClg6BjIdUQAyGRGAWhY39Pf0z/TbeeF1+7dDDwcr/ce985JwBu8AmF83OPR8sKLt4sd3CFd8tdPODLsgNXXVvu4VY9We6z/8pN5bj8CttbhhUGeLHcoW9huYtnfFh2uPNtuQdRd5b7GKg5pqiwwwk1cmTYooFgiDVGrCE0AkQYk2dIcGwrptXuVOfZtpHheiShDqKxzJKjcLRESYWcp0CKDf8dy7LJmyLdEBfsZThwltAPizQ7FAkhZgZzz9SaG2nr7dNdMOH5r3ruh8zmMaHm+zcr4qps4qrOUgl9LRP58yeHkRdozyS+FHXFXo095yaaUNzI+201sbBK631elaJ14Gut5YLgD5cXTxUAAAB4nGNgYGBmgGAZBkYGEIgB8hjBfBYGByDNw8DBwARkezH4MPgzhDBE/f8PFPUE84JBvP87/m//v/X/pv9roSbAASMbA7oQ+YCRCeRMFiCLlQ0swE4tk2kKAP97EMEAAAB4nGNgZgCD/80MRgxYAAAoRAG4AHicRY09SCNREMfnuWv20LhR4x5+7GHAFOcX+AknNoKmtrKwlDtR4bg7jpggWmhh42a51k5b7QTf220eiLUY3ErSWFja2OhM8l5xTxEdhilmfr//MLBtYIy1LP0qbhR/rv6YAtYEDIYpA9THyG+iLxZ125eBb1/SXbMP2xkfoN2Hgw4fBny23wnWi9ALAzAy//vP1t+NtfVi7uv3wdzE2Pi3kdzCSim38J7+8cbUEAzDKIzBFEzDLHxiLD+zvBmeVR91fyCpIJmUeCEt+ZnydKLzKanLHhXwQhccl3qOS8jL7Aq5p7hv7yF33ApyVsXYqtKtFygRKF5/CgLk+sZM0fx6r2cM0Jg0hIqV0DcvDPKUqxaPS5SUWZWujZ94OqFrShz3+R/GAUad2Tls0J2X3VWRkiqmmmM2MUqMHDdEwVCjsFBTzVPCIKL+jEKdoTAJ4VvCLj6EHt1jrGTKyJGuqQjPHbex09XIeuUjSg5TQboFuelKpZJOY9yKIsTTdNt/UmLMwwB4nGNgZIAAHgYRBhYgzQTEjBAMAALLACoB9AAABQQAQQPoAEQD6AA+AsQARAPqAD0D6ABFA+oANwAAAAEAAAAA1aPejAAAAADX+6YkAAAAANf7qzs=) format("woff");
+	font-weight: 400;
+	font-style: normal
+}
+
+
+@keyframes pulse {
+    0%, 100% {
+      background-color: #f56a3f;
+    }
+    50% {
+      background-color: #9e42b0;
+    }
+  }
+
+
 :root{
-    --bkg-color:#303030;
+    --bkg-color:#10141B;
     --text-color:#FFFFFF;
-    --text-font:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --text-font:arcadegamer, pixe;
 }
 
 body{
@@ -20,11 +57,9 @@ nav{
     grid-template-columns: repeat(3,33%);
     align-items: center;
     height: 3vh;
-    background-color: #272727;
+    background-color: #070A0D;
     padding-top: 1vh;
     padding-bottom: 1vh;
-    border-bottom-left-radius: 3vh;
-    border-bottom-right-radius: 3vh;
 }
 
 nav>.setdiv{
@@ -40,7 +75,8 @@ nav>.setdiv>button{
     border: none;
     color: white;
     font-size: 3vh;
-    font-family: var(--text-font);
+    font-family: feshfont;
+    font-weight: 600;
 
     border-radius: 1vh;
 }
@@ -52,6 +88,7 @@ nav>.titlediv{
     display: flex;
     width: max-content;
     align-self: center;
+    align-items: center;
 }
 
 nav>.titlediv>button{
@@ -59,15 +96,125 @@ nav>.titlediv>button{
     border: none;
     color: white;
     font-size: 3vh;
+    font-family: feshfont;
 }
 
 #title{
+    display: flex;
+    justify-content: center;
+    align-self: center;
     font-size: 3vh;
     font-family: var(--text-font);
+    width: 17vh;
     color:var(--text-color);
-    margin-left: 2vh;
-    margin-right: 2vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
     font-weight: 800;
 }
 
+
+nav>.settingsdiv{
+    height: 3vh;
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-direction: row-reverse;
+    align-self: center;
+    align-items: center;
+}
+
+
+#search{
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-self: center;
+    align-items: center;
+    margin-right: 1vh;
+}
+
+#glass{
+    height: 2vh;
+    width: auto;
+}
+
+#search > input{
+    display: flex;
+    caret-color:white;
+    height: 2vh;
+    width: 15vh;
+    margin: 0;
+    padding:0;
+    background-color: var(--bkg-color);
+    border: none;
+    text-transform: uppercase;
+    font-family: MinoFont;
+    color:white;
+    font-weight: 800;
+    letter-spacing: 0.3vh;
+}
+
+#search > input:focus{
+    outline-width: 0;
+}
+
 /*---------------------------*/
+
+
+
+
+/*----------IFRAME-----------*/
+
+
+iframe{
+    width: 100%;
+    height: calc(100% - 5vh);
+}
+
+
+
+/*--------MD STUFF-----------*/
+
+#content{
+    color: white;
+    margin-left: 1vw;
+}
+
+#content > h1, #content>h2, #content>h3, #content>h4{
+    font-family: feshfont;
+    
+}
+
+p{
+    font-family: feshfont;
+}
+.piece{
+    font-family: MinoFont;
+}
+
+.fumen{
+    border: 1px solid white;
+}
+
+
+.T{
+    color:#9739a2;
+}
+.I{
+    color:#42afe1;
+}
+.J{
+    color: #1165b5;
+}
+.L{
+    color:#f38927;
+}
+.O{
+    color:#f6d03c;
+}
+.S{
+    color:#51b84d;
+}
+.Z{
+    color:#eb4f65;
+}
