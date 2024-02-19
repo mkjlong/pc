@@ -31,6 +31,7 @@ $("input").on("keydown",function(e){
             fumenlist = collection[i]
             console.log(fumenlist)
             if(fumenlist.length>0){
+                hasSetup=true
                 for(fumen of fumenlist){
                     const container = document.createElement('div');
 
@@ -49,6 +50,9 @@ $("input").on("keydown",function(e){
             break
         }
 
+    }
+    if(!hasSetup & hasinfo){
+        $("#fumendiv").html("D:")
     }
 })
 
