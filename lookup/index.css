@@ -16,6 +16,10 @@ input{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#twopiece{
+    width: 50px;
+}
+
 #fumendiv>div > img{
 
     display: block;

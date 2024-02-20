@@ -1,4 +1,7 @@
-$("input").on("keydown",function(event){
+var twopiece = ""
+var pieces = ""
+
+$("input").on("keydown",function(){
     
     const key = event.key.toUpperCase();
     if(key == "ENTER" || event.ctrlKey){
@@ -13,23 +16,39 @@ $("input").on("keydown",function(event){
         event.preventDefault();
         return;
     }
+})
 
-    if(key == "BACKSPACE"){
-        pieces = this.value.toUpperCase().slice(0,-1);
-    }else{
-        pieces = this.value.toUpperCase() + key;
-    }
+
+$("#twopiece").on("keyup",function(event){
+
+    twopiece = this.value.toUpperCase();
+    update(twopiece,pieces)
+})
+
+$("#queue").on("keyup",function(event){
     
+    
+    pieces = this.value.toUpperCase();
+    update(twopiece,pieces)
+
+    update(twopiece,pieces)
+    
+})
+
+
+
+function update(twopiece,pieces){
     hasinfo = false
     hasSetup = false
     $("#fumendiv").empty();
-    for(const i of Object.keys(collection)){
-        
+    var setups = collection[twopiece]
+
+    if(setups==undefined)return;
+
+    for(const i of Object.keys(setups)){
         if(pieces.startsWith(i)){
             hasinfo=true
-            console.log(i)
-            fumenlist = collection[i]
-            console.log(fumenlist)
+            fumenlist = setups[i]
             if(fumenlist.length>0){
                 hasSetup=true
                 for(fumen of fumenlist){
@@ -54,5 +73,4 @@ $("input").on("keydown",function(event){
     if(!hasSetup & hasinfo){
         $("#fumendiv").html("D:")
     }
-})
-
+}
