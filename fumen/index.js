@@ -1,4 +1,14 @@
-var fumen = "v115@vhAAgH"
+if(window.location.search){
+    fumen = window.location.search.slice(1)
+    try {
+        decoder.decode(fumen);
+    } catch (error) {
+        fumen = "v115@vhAAgH"
+    }
+}else{
+    fumen = "v115@vhAAgH"
+}
+
 var height = 4
 var piece = 8
 var page_number = 0;
