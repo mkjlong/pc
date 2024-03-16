@@ -12,13 +12,6 @@ body{
     justify-content: center;
 }
 
-h1{
-    display: flex;
-    justify-content: center;
-    font-family: madly;
-    color:var(--accent-text-color);
-}
-
 #fumendiv{
     display: flex;
     flex-direction: row;
@@ -37,14 +30,17 @@ h1{
     width: 50px;
 }
 
-img{
+.fumen{
     aspect-ratio: 220 / 92;
-    width: 220px;
+
+    width: 15vw;
     height: auto;
     background-color: var(--bkg-color);
-    border-radius: 7.5px;
-    margin-left:25px;
-    margin-right:25px;
+    border-radius: min(0.3vw,10px);
+    margin-left:min(25px,2vw);
+    margin-right:min(25px,2vw);
+    width: min(22vw,220px);
+    height: auto;
 
 }
 
@@ -59,7 +55,7 @@ body > div{
     justify-content: center;
     padding: 20px;
     padding-top: 40px;
-    border-radius:20px;
+    border-radius:min(2vw,20px);
     border:1px var(--border-color);
     margin-bottom:100px;
     color:var(--accent-text-color);
@@ -96,8 +92,10 @@ body > div > .collapsible{
 
 .line > h4 > img{
     aspect-ratio: 1/1;
-    width: 15px;
-    height: 15px;
+    width: 0.75vw;
+    height: 0.75vw;
+    max-width: 220px;
+    max-height: 110px;
     margin: 0;
     transition: all 0.2s;
 }
@@ -108,7 +106,7 @@ body > div > .collapsible{
 
 .space{
     width: 100%;
-    height:25px;
+    height:min(25px,5vw);
 }
 
 .content.hidden{
@@ -119,6 +117,14 @@ body > div > .collapsible{
     display: none;
 }
 
+h1{
+    font-size: min(3vw,30px);
+    display: flex;
+    justify-content: center;
+    font-family: madly;
+    color:var(--accent-text-color);
+}
+
 h2{
     position: absolute;
     top: 0;
@@ -127,13 +133,13 @@ h2{
     transform: translateY(-50%);
     background-color: var(--accent-color);
     border: 1px var(--border-color);
-    border-radius: 5px;
+    border-radius: min(0.5vw,10px);
     left:20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: min(10px,2vw);
+    padding-right: min(10px,2vw);
     padding-top: 5px;
     padding-bottom: 5px;
-    font-size: 20px;
+    font-size: min(2vw, 25px);
     
 }
 
@@ -145,13 +151,12 @@ h4{
     padding:0;
     background-color: var(--accent-color);
     transform: translateY(-50%);
-    border-radius: 5px;
     left:20px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    font-size: 20px;
+    font-size: min(2vw,25px);
     
 }
 
@@ -160,7 +165,7 @@ h3{
     display: flex;
     font-family: Karla;
     font-weight: normal;
-    font-size: 20px;
+    font-size: min(3vw,15px);
     padding: 0;
     margin: 0;
     justify-content: center;
@@ -227,24 +232,4 @@ span{
 }
 .Z:hover{
     color:#ff7f79
-}
-
-@media screen and (max-width: 1462px){
-    .fumen{
-        width: 110px;
-        border-radius: 5px;
-    }
-    h3{
-        font-size: 15px;
-    }
-}
-
-@media screen and (max-width: 825px){
-    .fumen{
-        width: 65px;
-        border-radius: 3px;
-    }
-    h3{
-        font-size: 10px;
-    }
 }
