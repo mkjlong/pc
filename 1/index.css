@@ -6,7 +6,11 @@ iframe{
 }
 
 body{
-    padding:0;
-    margin: 0;
     color:white;
+    background-color: var(--bkg-color);
+    user-select: none;
+}
+
+h1{
+    font-family: madly;
 }

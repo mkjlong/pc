@@ -1,0 +1,79 @@
+body{
+    color:var(--text-color);
+}
+
+#fumendiv{
+    display: flex;
+    flex-direction: row;
+}
+
+#fumendiv > div{
+    border:10px solid #101010;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: minofont;
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+
+#twopiece{
+    width: 25px;
+}
+
+#fumendiv>div > img{
+
+    display: block;
+    width: 200px;
+    border-top: 5px solid #101010;
+}
+
+
+
+.T[active="0"]{
+    color:#9739a2
+}
+.T[active="1"]{
+   color:#d958e9 
+}
+.I[active="0"]{
+    color:#42afe1
+}
+.I[active="1"]{
+    color:#6ceaff
+}
+
+.J[active="0"]{
+    color:#1165b5
+}
+.J[active="1"]{
+    color:#339bff
+}
+
+.L[active="0"]{
+    color:#f38927
+}
+.L[active="1"]{
+    color:#ffba59
+}
+
+.O[active="0"]{
+    color:#f6d03c
+}
+.O[active="1"]{
+    color:#ffff7f
+}
+
+.S[active="0"]{
+    color:#51b84d
+}
+.S[active="1"]{
+    color:#84f880
+}
+
+.Z[active="0"]{
+    color:#eb4f65
+}
+.Z[active="1"]{
+    color:#ff7f79
+}

@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC setups</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="global.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <script src="./sets.js" defer></script>
@@ -16,7 +17,6 @@
 <body>
     <nav>
         <div class="setdiv">
-            <button id = set>mk</button>
         </div>
         <div class="titlediv">
             <button class = changePC><</button>
@@ -27,11 +27,12 @@
             <img id = rotations>
             <img id = theme>
             <div id = search>
-                <input maxlength="7" type="text">
+                <input maxlength="8" type="text">
             </div>
         </div>
     </nav>
-    <div id = content></div>
-    <iframe src="./1/index.html" frameborder="0"></iframe>
+    <div id = content>
+        <iframe id = "ifr" src="./1/index.html" frameborder="0" onload = "this.width=screen.width;"></iframe>
+    </div>
 </body>
 </html>

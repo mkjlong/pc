@@ -1,21 +1,6 @@
 const converter = new showdown.Converter();
 
-let pcNum = 1;
-let set = JSON.parse(localStorage.getItem("set")) ?? defaultSet;
-
-
-
-function setSet(pcNum,setName = set[pcNum-1]){
-    set[pcNum-1] = setName;
-    try{
-        document.getElementsByTagName("iframe")[0].src = sets[pcNum-1][set[pcNum-1]]
-
-    }catch{
-        console.log("NO!!");
-    }
-    localStorage.setItem("set",JSON.stringify(set))
-    $("#set").html(setName);
-}
+let pcNum = Number(localStorage.getItem("pcNum")) ?? 1;
 
 
 function setPC(num){
@@ -28,7 +13,7 @@ function setPC(num){
         pcNum = num;
     }
     $("#title").html(`${['','first','second','third','fourth','fifth','sixth','seventh'][pcNum]} PC`)
-    setSet(pcNum)
+    localStorage.setItem("pcNum",pcNum);
     //console.log(`User set pc to ${pcNum}`);
 }
 
@@ -51,55 +36,43 @@ $(".changePC").on(`click`,function(event){
     const shift = this.innerHTML == '&lt;'?-1:1;
 
     setPC(pcNum+shift);
+    document.getElementById("ifr").src = `./${pcNum}/index.html`
 })
-
-setPC(pcNum);
-
-
-
-
-//change the set when the user wants to
-$("#set").on("click",function(event){
-    setSet(pcNum,Object.keys(sets[pcNum-1])[(Object.keys(sets[pcNum-1]).indexOf(set[pcNum-1]) + 1) % Object.keys(sets[pcNum-1]).length])
-})
-
-
 
 $("#search > input").on("keydown",function(event){
     const key = event.key.toUpperCase();
     if(key == "ENTER" || event.ctrlKey){
         return;
     }
-    if(!/[TIJLOSZ]/.test(key)){
+    if(!/[TIJLOSZ\|\-]/.test(key)){
         event.preventDefault();
         return;
     }
 
-    if(key == "BACKSPACE"){
-        pieces = this.value.toUpperCase().slice(0,-1);
-    }else{
-        pieces = this.value.toUpperCase() + key;
+    
+
+    if(this.value.toUpperCase().split("|")[this.value.toUpperCase().split(/[\|\-]/).length-1].includes(key)){
+        if(window.getSelection && window.getSelection().type === 'Range'){
+            if(!window.getSelection().toString().includes(key)){
+                event.preventDefault();
+            }
+        }else{
+            event.preventDefault();
+        }
+        return;
     }
 
-    setPC([1,3,5,7,2,4,6,1][pieces.length])
+    if((this.value.toUpperCase().includes("|") || this.value.toUpperCase().includes("-")) && (key == "|"||key=="-"))event.preventDefault();
+})
 
-    sorted_pieces = pieces.split('').sort((a,b)=>{
-        return ["T","I","J","L","O","S","Z"].indexOf(a) < ["T","I","J","L","O","S","Z"].indexOf(b) ? -1 : 1
-    }).join('')
-    fetch(`./${pcNum}/${sorted_pieces}.md`).then(res=>{
-        res.text().then(text=>{
-            new_html = converter.makeHtml(text)
-            
-            new_html = new_html.replace(/(v115@[a-zA-Z0-9\?\/]+)/gi,function(fumen){
-                console.log(fumen);
-                return `<img class = fumen fumen = ${fumen} src = ${getDataURL(fumen)}>`
-            })
-            new_html = new_html.replace(/\{([TIJLOSZ])\}/gi,"<span class = 'piece $1'>$1</span>")
-
-            $("#content").html(new_html)
-        })
-    })
+$("#search > input").on("input",function(e){
+    queue = this.value.toUpperCase().split(/[\|\-]/);
+    setPC([1,3,5,7,2,4,6,1][queue[0].length])
+    document.getElementById("ifr").src = `./${pcNum}/index.html?${queue.join("|")}`
 
 })
 
 $("#search > input").focus();
+
+setPC(pcNum);
+document.getElementById("ifr").src = `./${pcNum}/index.html`
