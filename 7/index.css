@@ -33,7 +33,6 @@ body{
 .fumen{
     aspect-ratio: 220 / 92;
 
-    width: 15vw;
     height: auto;
     background-color: var(--bkg-color);
     border-radius: min(0.3vw,10px);
@@ -41,8 +40,18 @@ body{
     margin-right:min(25px,2vw);
     width: min(22vw,220px);
     height: auto;
-
+    transition: all 0.5s;
 }
+
+.fumen.active{
+    border: 1px solid white;
+    width: min(23vw,230px);
+}
+
+.fumen:not(.active){
+    border: 1px solid transparent;
+}
+
 
 body > div{
     position: relative;
@@ -59,11 +68,13 @@ body > div{
     border:1px var(--border-color);
     margin-bottom:100px;
     color:var(--accent-text-color);
+    transition: all 0.5s;
 }
 
 .center{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 body > div > *{
@@ -82,6 +93,47 @@ body > div > .collapsible{
     flex-direction: column;
     justify-content: center;
 
+}
+
+.solutions{
+    border: 1px var(--border-color);
+    border-radius: 0.5vw;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 1s;
+}
+
+.solutions:not(.hidden){
+    animation: solution_enter 2s ease-in-out;
+}
+
+.solutions:not(.hidden) > *:not(h4){
+    animation: solution_enter_children 2s ease-in-out;
+}
+
+@keyframes solution_enter {
+    0%{
+        max-height: 0;
+    }
+
+
+    100%{
+        max-height: 1000px;
+        opacity: 1;
+    }
+}
+
+@keyframes solution_enter_children {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+    
 }
 
 .line{
@@ -106,7 +158,7 @@ body > div > .collapsible{
 
 .space{
     width: 100%;
-    height:min(25px,5vw);
+    height:min(30px,5vw);
 }
 
 .content.hidden{
@@ -157,6 +209,9 @@ h4{
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: min(2vw,25px);
+    color:var(--text-color);
+    font-family:Karla;
+    font-weight:normal;
     
 }
 
@@ -165,7 +220,7 @@ h3{
     display: flex;
     font-family: Karla;
     font-weight: normal;
-    font-size: min(3vw,15px);
+    font-size: min(3vw,20px);
     padding: 0;
     margin: 0;
     justify-content: center;
@@ -184,6 +239,44 @@ span{
     letter-spacing: 2px;
     padding-left: 2px;
 }
+
+#rightclick{
+    padding: 0;
+    margin: 0;
+	opacity: 1;
+	position: fixed;
+	width: 150px;
+	background-color: #292a2d;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+    justify-content: left;
+	box-shadow: #000000 10px;
+    z-index: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0px;
+    transition: none;
+}
+#rightclick.hidden{
+	top:-1000px;
+	left:-1000px;
+}
+
+#rightclick > span{
+	padding: 5px;
+	padding-left:20px;
+	font-size:13px;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+    justify-content: left;
+    letter-spacing: 0px;
+}
+
+
+#rightclick > span:hover{
+	background-color: #3A3C40;
+}
+
 
 
 .T{
@@ -232,4 +325,8 @@ span{
 }
 .Z:hover{
     color:#ff7f79
+}
+
+a{
+    text-decoration: none;
 }
