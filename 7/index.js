@@ -42,7 +42,6 @@ window.addEventListener('click',function(e){
         $("#rightclick").addClass('hidden')
         $("#rightclick").css({"left":"","top":""})
     }
-    e.preventDefault()
 })
 window.oncontextmenu=function(e){
     e.preventDefault()
