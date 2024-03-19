@@ -1,59 +1,351 @@
-@font-face {
-	font-family: feshfont;
-	src: url(../assets/fonts/VCREAS\ 3.0.ttf);
+::-webkit-scrollbar{
+    width: 0;
 }
 
-@font-face {
-	font-family: arcadegamer;
-	src: url(../assets/fonts/Arcade\ Gamer.otf);
-}
-@font-face {
-	font-family: pixe;
-	src: url(../assets/fonts/Pixeboy-z8XGD.ttf);
-}
 
-@font-face {
-	font-family: MinoFont;
-	src: url(data:font/woff;base64,d09GRk9UVE8AAAUkAAsAAAAABxwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAADTAAAAYMAAAGoS5stSkZGVE0AAAUIAAAAHAAAAByFmy/sR0RFRgAABNAAAAAYAAAAHAAVABRPUy8yAAABZAAAAEgAAABgWAhhGGNtYXAAAALYAAAAXQAAAWIJywzraGVhZAAAAQgAAAA0AAAANhQOlI9oaGVhAAABPAAAAB4AAAAkB2gFDWhtdHgAAAToAAAAIAAAACAdSAHAbWF4cAAAAVwAAAAGAAAABgAIUABuYW1lAAABrAAAASkAAAIWcTAiknBvc3QAAAM4AAAAEwAAACD/hgAyeJxjYGRgYADiBeIln+L5bb4ycDO/AIowXP+9TAVCr7ZmMGdgYDnE5A3kcjAwgUQBViYLXXicY2BkYGDyZmBgiGJlAZIMLIcYGBlQAQcAIs8BgQAAAABQAAAIAAB4nGNgYX7OOIGBlYGBqYtpDwMDQw+EZnzAYMjIBBRlYGVmgAFGBiQQkOaawtDA4MkQxazw34IhiskbWQ2TC4MCEDICAF5lCtB4nIWPMWvCUBSFz9NoydBSXEq3OxUFE15Ch9RVySClg6BjIdUQAyGRGAWhY39Pf0z/TbeeF1+7dDDwcr/ce985JwBu8AmF83OPR8sKLt4sd3CFd8tdPODLsgNXXVvu4VY9We6z/8pN5bj8CttbhhUGeLHcoW9huYtnfFh2uPNtuQdRd5b7GKg5pqiwwwk1cmTYooFgiDVGrCE0AkQYk2dIcGwrptXuVOfZtpHheiShDqKxzJKjcLRESYWcp0CKDf8dy7LJmyLdEBfsZThwltAPizQ7FAkhZgZzz9SaG2nr7dNdMOH5r3ruh8zmMaHm+zcr4qps4qrOUgl9LRP58yeHkRdozyS+FHXFXo095yaaUNzI+201sbBK631elaJ14Gut5YLgD5cXTxUAAAB4nGNgYGBmgGAZBkYGEIgB8hjBfBYGByDNw8DBwARkezH4MPgzhDBE/f8PFPUE84JBvP87/m//v/X/pv9roSbAASMbA7oQ+YCRCeRMFiCLlQ0swE4tk2kKAP97EMEAAAB4nGNgZgCD/80MRgxYAAAoRAG4AHicRY09SCNREMfnuWv20LhR4x5+7GHAFOcX+AknNoKmtrKwlDtR4bg7jpggWmhh42a51k5b7QTf220eiLUY3ErSWFja2OhM8l5xTxEdhilmfr//MLBtYIy1LP0qbhR/rv6YAtYEDIYpA9THyG+iLxZ125eBb1/SXbMP2xkfoN2Hgw4fBny23wnWi9ALAzAy//vP1t+NtfVi7uv3wdzE2Pi3kdzCSim38J7+8cbUEAzDKIzBFEzDLHxiLD+zvBmeVR91fyCpIJmUeCEt+ZnydKLzKanLHhXwQhccl3qOS8jL7Aq5p7hv7yF33ApyVsXYqtKtFygRKF5/CgLk+sZM0fx6r2cM0Jg0hIqV0DcvDPKUqxaPS5SUWZWujZ94OqFrShz3+R/GAUad2Tls0J2X3VWRkiqmmmM2MUqMHDdEwVCjsFBTzVPCIKL+jEKdoTAJ4VvCLj6EHt1jrGTKyJGuqQjPHbex09XIeuUjSg5TQboFuelKpZJOY9yKIsTTdNt/UmLMwwB4nGNgZIAAHgYRBhYgzQTEjBAMAALLACoB9AAABQQAQQPoAEQD6AA+AsQARAPqAD0D6ABFA+oANwAAAAEAAAAA1aPejAAAAADX+6YkAAAAANf7qzs=) format("woff");
-	font-weight: 400;
-	font-style: normal
-}
-
-html{
-    overflow-y: hidden;
-}
-
-:root{
-    --bkg-color:#0d1117;
-    --text-color:#FFFFFF;
-    --text-font:arcadegamer, pixe;
-}
 
 body{
+    color:var(--text-color);
+    background-color: var(--bkg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#fumendiv{
+    display: flex;
+    flex-direction: row;
+}
+
+#fumendiv > div{
+    border:10px solid #101010;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: pixe;
+    font-size: 25px;
+}
+
+#twopiece{
+    width: 50px;
+}
+
+.fumen{
+    aspect-ratio: 220 / 92;
+
+    height: auto;
+    background-color: var(--bkg-color);
+    border-radius: min(0.3vw,10px);
+    margin-left:min(25px,2vw);
+    margin-right:min(25px,2vw);
+    width: min(17vw,220px);
+    height: auto;
+    transition: all 0.25s;
+}
+
+.fumen.active{
+    border: 1px solid white;
+    width: min(18vw,230px);
+}
+
+.fumen:not(.active){
+    border: 1px solid transparent;
+}
+
+
+body > div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: min(1200px,90%);
+    background: var(--accent-color);
+    justify-content: center;
+    padding: 20px;
+    padding-top: 40px;
+    border-radius:min(2vw,20px);
+    border:1px var(--border-color);
+    margin-bottom:max(75px,3vw);
+    color:var(--accent-text-color);
+    transition: all 0.5s;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+body > div > *{
+    display: flex;
+    justify-content: center;
+}
+
+body > div > div > div{
+    display: flex;
+    justify-content: center;
+}
+
+body > div > .collapsible{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.solutions{
+    border: 1px var(--border-color);
+    border-radius: 0.5vw;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 1s;
+}
+
+.hidden{
+    display: none;
+}
+/*
+.solutions:not(.hidden){
+    animation: solution_enter 1s cubic-bezier(.68,.09,.25,.99);
+}
+
+.solutions:not(.hidden) > *:not(h4){
+    animation: solution_enter_children 1s cubic-bezier(.68,.09,.25,.99);
+}
+
+@keyframes solution_enter {
+    0%{
+        max-height: 0;
+    }
+
+
+    100%{
+        max-height: 1000px;
+        opacity: 1;
+    }
+}
+
+@keyframes solution_enter_children {
+    0%{
+        opacity: 0;
+        display: flex;
+    }
+    100%{
+        opacity: 1;
+        display: flex;
+    }
+    
+}
+
+*/
+
+.line{
+    position: relative;
+    width: 100%;
+    border: 1px var(--border-color);
+}
+
+.line > h4 > img{
+    aspect-ratio: 1/1;
+    width: 0.75vw;
+    height: 0.75vw;
+    max-width: 220px;
+    max-height: 110px;
+    margin: 0;
+    transition: all 0.2s;
+}
+
+.line > h4 > img.rotate{
+    transform: rotate(-90deg);
+}
+
+.space{
+    width: 100%;
+    height:min(20px,5vw);
+}
+
+.content.hidden{
+    display: none;
+}
+
+.hidden{
+    display: none;
+}
+
+h1{
+    font-size: min(3vw,30px);
+    display: flex;
+    justify-content: center;
+    font-family: madly;
+    color:var(--accent-text-color);
+}
+
+h2{
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding:0;
+    transform: translateY(-50%);
+    background-color: var(--accent-color);
+    border: 1px var(--border-color);
+    border-radius: min(0.5vw,10px);
+    left:20px;
+    padding-left: min(10px,2vw);
+    padding-right: min(10px,2vw);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: min(2vw, 25px);
+    
+}
+
+h4{
+    font-family: madly;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding:0;
+    background-color: var(--accent-color);
+    transform: translateY(-50%);
+    left:20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: min(2vw,25px);
+    color:var(--text-color);
+    font-family:Karla;
+    font-weight:normal;
+    
+}
+
+
+h3{
+    display: flex;
+    font-family: Karla;
+    font-weight: normal;
+    font-size: min(3vw,20px);
     padding: 0;
     margin: 0;
-    background-color: var(--bkg-color);
-}
-
-
-#grid{
-    display: grid;
-    height: 100%;
-}
-
-
-#grid > div > span{
-    color:var(--text-color);
-    display: flex;
-    width: 100%;
     justify-content: center;
-    font-family: arcadegamer;
-    font-weight: 1000;
-    font-size: 4vh;
-    background-color: #070A0D;
-    height: fit-content;
+    color:var(--text-color)
+}
+span{
+    justify-content: center;
+    background-color: transparent;
+    cursor:default;
+    margin: 0;
+    border: 0;
+    color:white;
+    font-family: MinoFont;
+    color: #868686;
+    user-select: none;
+    letter-spacing: 2px;
+    padding-left: 2px;
 }
 
-#grid > div > div{
-    height: 100%;
+#rightclick{
+    padding: 0;
+    margin: 0;
+	opacity: 1;
+	position: fixed;
+	width: 150px;
+	background-color: #292a2d;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+    justify-content: left;
+	box-shadow: #000000 10px;
+    z-index: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0px;
+    transition: none;
+}
+#rightclick.hidden{
+	top:-1000px;
+	left:-1000px;
+}
+
+#rightclick > span{
+	padding: 5px;
+	padding-left:20px;
+	font-size:13px;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+    justify-content: left;
+    letter-spacing: 0px;
+}
+
+
+#rightclick > span:hover{
+	background-color: #3A3C40;
+}
+
+
+
+.T{
+    color:#9739a2
+}
+/*
+.T:hover{
+   color:#d958e9 
+}
+*/
+.I{
+    color:#42afe1
+}
+/*
+.I:hover{
+    color:#6ceaff
+}
+*/
+.J{
+    color:#1165b5
+}
+/*
+.J:hover{
+    color:#339bff
+}
+*/
+
+.L{
+    color:#f38927
+}
+/*
+.L:hover{
+    color:#ffba59
+}
+*/
+.O{
+    color:#f6d03c
+}
+/*
+.O:hover{
+    color:#ffff7f
+}
+*/
+
+.S{
+    color:#51b84d
+}
+
+/*
+.S:hover{
+    color:#84f880
+}
+*/
+
+.Z{
+    color:#eb4f65
+}
+/*
+.Z:hover{
+    color:#ff7f79
+}
+*/
+a{
+    text-decoration: none;
 }
